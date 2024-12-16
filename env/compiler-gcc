@@ -1,0 +1,20 @@
+COMMON_FLAGS="-O3 -march=native -pipe"
+
+CFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS}"
+FCFLAGS="${COMMON_FLAGS}"
+FFLAGS="${COMMON_FLAGS}"
+
+CGO_CFLAGS="${COMMON_FLAGS}"
+CGO_CXXFLAGS="${COMMON_FLAGS}"
+CGO_FFLAGS="${COMMON_FLAGS}"
+CGO_LDFLAGS="${LDFLAGS}"
+
+RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=3"
+
+CC="gcc"
+CXX="g++"
+CPP="gcc -E"
+AR="ar"
+NM="nm"
+RANLIB="ranlib"

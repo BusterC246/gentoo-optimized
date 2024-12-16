@@ -1,0 +1,24 @@
+GRAPHITE_FLAGS="-fgraphite-identity -floop-nest-optimize"
+LTO_FLAGS="-fdevirtualize-at-ltrans -fipa-pta"
+WARNING_FLAGS="-Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing"
+
+COMMON_FLAGS="-O3 -march=native -pipe -flto=16 ${GRAPHITE_FLAGS} ${LTO_FLAGS} ${WARNING_FLAGS}"
+
+CFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS}"
+FCFLAGS="${COMMON_FLAGS}"
+FFLAGS="${COMMON_FLAGS}"
+
+CGO_CFLAGS="${COMMON_FLAGS}"
+CGO_CXXFLAGS="${COMMON_FLAGS}"
+CGO_FFLAGS="${COMMON_FLAGS}"
+CGO_LDFLAGS="${LDFLAGS}"
+
+RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=3 -Clinker=clang -Clinker-plugin-lto -Clink-arg=-fuse-ld=lld"
+
+CC="gcc"
+CXX="g++"
+CPP="gcc -E"
+AR="ar"
+NM="nm"
+RANLIB="ranlib"
