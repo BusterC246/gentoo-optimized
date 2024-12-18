@@ -1,5 +1,7 @@
+N_THREADS="16"
+
 LTO_FLAGS="-fdevirtualize-at-ltrans -fipa-pta"
-POLLY_FLAGS="-fplugin=LLVMPolly.so -mllvm=-polly -mllvm=-polly-vectorizer=stripmine -mllvm=-polly-omp-backend=LLVM -mllvm=-polly-parallel -mllvm=-polly-num-threads=$(nproc) -mllvm=-polly-scheduling=dynamic"
+POLLY_FLAGS="-fplugin=LLVMPolly.so -mllvm=-polly -mllvm=-polly-vectorizer=stripmine -mllvm=-polly-omp-backend=LLVM -mllvm=-polly-parallel -mllvm=-polly-num-threads=${N_THREADS} -mllvm=-polly-scheduling=dynamic"
 WARNING_FLAGS="-Werror=odr -Werror=strict-aliasing"
 
 COMMON_FLAGS="-O3 -march=native -pipe -flto=thin ${LTO_FLAGS} ${POLLY_FLAGS} ${WARNING_FLAGS}"
