@@ -4,12 +4,13 @@ CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
-LDFLAGS="${LDFLAGS} -Wl,-O2 -Wl,--as-needed"
+#LDFLAGS="${LDFLAGS} -Wl,-O2 -Wl,--as-needed"
 
 CGO_CFLAGS="${COMMON_FLAGS}"
 CGO_CXXFLAGS="${COMMON_FLAGS}"
 CGO_FFLAGS="${COMMON_FLAGS}"
 CGO_LDFLAGS="${LDFLAGS}"
+
 RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=3
 
 CC="clang"
