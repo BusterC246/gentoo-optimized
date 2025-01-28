@@ -1,6 +1,6 @@
 WARNING_FLAGS="-Werror=odr -Werror=strict-aliasing"
 
-COMMON_FLAGS="-O3 -march=native -pipe -flto=thin ${WARNING_FLAGS}"
+COMMON_FLAGS="-O3 -march=native -pipe -flto=auto -fuse-linker-plugin ${WARNING_FLAGS}"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"

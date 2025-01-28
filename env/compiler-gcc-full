@@ -1,8 +1,9 @@
 GRAPHITE_FLAGS="-fgraphite-identity -floop-nest-optimize"
-LTO_FLAGS="-fdevirtualize-at-ltrans -fipa-pta"
+IPAPTA="-fipa-pta"
+DEVIRTLTO="-fdevirtualize-at-ltrans"
 WARNING_FLAGS="-Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing"
 
-COMMON_FLAGS="-O3 -march=native -pipe -flto=auto ${GRAPHITE_FLAGS} ${LTO_FLAGS} ${WARNING_FLAGS}"
+COMMON_FLAGS="-O3 -march=native -pipe -flto=auto -fuse-linker-plugin ${GRAPHITE_FLAGS} ${IPAPTA} ${DEVIRTLTO} ${WARNING_FLAGS}"
 
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
