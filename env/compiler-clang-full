@@ -1,11 +1,9 @@
 N_THREADS="16"
 
-IPAPTA="-fipa-pta"
-DEVIRTLTO="-fdevirtualize-at-ltrans"
 POLLY_FLAGS="-fplugin=LLVMPolly.so -mllvm=-polly -mllvm=-polly-vectorizer=stripmine -mllvm=-polly-omp-backend=LLVM -mllvm=-polly-parallel -mllvm=-polly-num-threads=${N_THREADS} -mllvm=-polly-scheduling=dynamic"
 WARNING_FLAGS="-Werror=odr -Werror=strict-aliasing"
 
-COMMON_FLAGS="-O3 -march=native -pipe -flto=auto -fuse-linker-plugin ${IPAPTA} ${DEVIRTLTO} ${POLLY_FLAGS} ${WARNING_FLAGS}"
+COMMON_FLAGS="-O3 -march=native -pipe -flto=auto  ${POLLY_FLAGS} ${WARNING_FLAGS}"
 CFLAGS="${COMMON_FLAGS} "
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
