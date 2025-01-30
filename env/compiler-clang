@@ -4,18 +4,14 @@ CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
-#LDFLAGS="${LDFLAGS} -Wl,-O2 -Wl,--as-needed"
+LDFLAGS="${LDFLAGS} -Wl,-O2 -Wl,--as-needed"
 
 CGO_CFLAGS="${COMMON_FLAGS}"
 CGO_CXXFLAGS="${COMMON_FLAGS}"
 CGO_FFLAGS="${COMMON_FLAGS}"
 CGO_LDFLAGS="${LDFLAGS}"
-<<<<<<< HEAD
 
-RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=3
-=======
 RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=3"
->>>>>>> 98c2e358523da9332f1f5ed77dbeac5579d9f443
 
 CC="clang"
 CPP="clang-cpp" # necessary for xorg-server and possibly other packages
