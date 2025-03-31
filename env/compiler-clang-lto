@@ -1,6 +1,6 @@
 WARNING_FLAGS="-Werror=odr -Werror=strict-aliasing"
 
-COMMON_FLAGS="-O3 -march=native -pipe -flto=auto ${WARNING_FLAGS}"
+COMMON_FLAGS="-O2 -march=native -pipe -flto=auto ${WARNING_FLAGS}"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
@@ -12,7 +12,7 @@ CGO_CXXFLAGS="${COMMON_FLAGS}"
 CGO_FFLAGS="${COMMON_FLAGS}"
 CGO_LDFLAGS="${LDFLAGS}"
 
-RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=3 -Clinker=clang -Clinker-plugin-lto -Clink-arg=-fuse-ld=lld"
+RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=2 -Clinker=clang -Clinker-plugin-lto -Clink-arg=-fuse-ld=lld"
 
 CC="clang"
 CPP="clang-cpp" # necessary for xorg-server and possibly other packages

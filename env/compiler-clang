@@ -1,4 +1,4 @@
-COMMON_FLAGS="-O3 -march=native -pipe"
+COMMON_FLAGS="-O2 -march=native -pipe"
 
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
@@ -11,7 +11,7 @@ CGO_CXXFLAGS="${COMMON_FLAGS}"
 CGO_FFLAGS="${COMMON_FLAGS}"
 CGO_LDFLAGS="${LDFLAGS}"
 
-RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=3"
+RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=2"
 
 CC="clang"
 CPP="clang-cpp" # necessary for xorg-server and possibly other packages

@@ -1,6 +1,6 @@
 WARNING_FLAGS="-Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing"
 
-COMMON_FLAGS="-O3 -march=native -flto=auto -pipe -fuse-linker-plugin ${WARNING_FLAGS}"
+COMMON_FLAGS="-O2 -march=native -flto=auto -pipe -fuse-linker-plugin ${WARNING_FLAGS}"
 
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
@@ -13,7 +13,7 @@ CGO_CXXFLAGS="${COMMON_FLAGS}"
 CGO_FFLAGS="${COMMON_FLAGS}"
 CGO_LDFLAGS="${LDFLAGS}"
 
-RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=3 -Clinker=clang -Clinker-plugin-lto -Clink-arg=-fuse-ld=lld"
+RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=2 -Clinker=clang -Clinker-plugin-lto -Clink-arg=-fuse-ld=lld"
 
 CC="gcc"
 CXX="g++"
