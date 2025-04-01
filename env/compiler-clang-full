@@ -1,25 +1,20 @@
+source /etc/portage/env/compiler-clang-lto
+
 N_THREADS="16"
 
 POLLY_FLAGS="-fplugin=LLVMPolly.so -mllvm=-polly -mllvm=-polly-vectorizer=stripmine -mllvm=-polly-omp-backend=LLVM -mllvm=-polly-parallel -mllvm=-polly-num-threads=${N_THREADS} -mllvm=-polly-scheduling=dynamic"
-WARNING_FLAGS="-Werror=odr -Werror=strict-aliasing"
 
-COMMON_FLAGS="-O2 -march=native -pipe -flto=auto  ${POLLY_FLAGS} ${WARNING_FLAGS}"
+COMMON_FLAGS="${COMMON_FLAGS} ${POLLY_FLAGS}"
 CFLAGS="${COMMON_FLAGS} "
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
-LDFLAGS="${LDFLAGS} -Wl,-O2 -Wl,--as-needed"
+LDFLAGS="${LDFLAGS}"
 
 CGO_CFLAGS="${COMMON_FLAGS}"
 CGO_CXXFLAGS="${COMMON_FLAGS}"
 CGO_FFLAGS="${COMMON_FLAGS}"
 CGO_LDFLAGS="${LDFLAGS}"
 
-RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=2 -Clinker=clang -Clinker-plugin-lto -Clink-arg=-fuse-ld=lld"
+RUSTFLAGS="${RUSTFLAGS}"
 
-CC="clang"
-CPP="clang-cpp" # necessary for xorg-server and possibly other packages
-CXX="clang++"
-AR="llvm-ar"
-NM="llvm-nm"
-RANLIB="llvm-ranlib"

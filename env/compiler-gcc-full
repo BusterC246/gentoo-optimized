@@ -1,27 +1,21 @@
+source /etc/portage/env/compiler-gcc-lto
+
 GRAPHITE_FLAGS="-fgraphite-identity -floop-nest-optimize"
 IPAPTA="-fipa-pta"
 SEMINTERPOS="-fno-semantic-interposition"
 DEVIRTLTO="-fdevirtualize-at-ltrans"
-WARNING_FLAGS="-Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing"
 
-COMMON_FLAGS="-O2 -march=native -pipe -flto=auto -fuse-linker-plugin ${GRAPHITE_FLAGS} ${IPAPTA} ${SEMINTERPOS} ${DEVIRTLTO} ${WARNING_FLAGS}"
+COMMON_FLAGS="${COMMON_FLAGS} ${GRAPHITE_FLAGS} ${IPAPTA} ${SEMINTERPOS} ${DEVIRTLTO}"
+LDFLAGS="${LDFLAGS}"
 
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
-LDFLAGS="${LDFLAGS} -Wl,-O2 -Wl,--as-needed"
 
 CGO_CFLAGS="${COMMON_FLAGS}"
 CGO_CXXFLAGS="${COMMON_FLAGS}"
 CGO_FFLAGS="${COMMON_FLAGS}"
 CGO_LDFLAGS="${LDFLAGS}"
 
-RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=2 -Clinker=clang -Clinker-plugin-lto -Clink-arg=-fuse-ld=lld"
-
-CC="gcc"
-CXX="g++"
-CPP="gcc -E"
-AR="ar"
-NM="nm"
-RANLIB="ranlib"
+RUSTFLAGS="${RUSTFLAGS}"
