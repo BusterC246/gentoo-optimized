@@ -1,2 +1,2 @@
-cp -r env/. /etc/portage/
+cp env/* /etc/portage/env
 cp package.env /etc/portage/
