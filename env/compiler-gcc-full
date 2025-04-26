@@ -1,11 +1,11 @@
 source /etc/portage/env/compiler-gcc-lto
 
-GRAPHITE_FLAGS="-fgraphite-identity -floop-nest-optimize"
+#GRAPHITE_FLAGS="-fgraphite-identity -floop-nest-optimize"
 IPAPTA="-fipa-pta"
 SEMINTERPOS="-fno-semantic-interposition"
 DEVIRTLTO="-fdevirtualize-at-ltrans"
 
-COMMON_FLAGS="${COMMON_FLAGS} ${GRAPHITE_FLAGS} ${IPAPTA} ${SEMINTERPOS} ${DEVIRTLTO}"
+COMMON_FLAGS="${COMMON_FLAGS} ${IPAPTA} ${SEMINTERPOS} ${DEVIRTLTO}"
 LDFLAGS="${LDFLAGS}"
 
 CFLAGS="${COMMON_FLAGS}"
