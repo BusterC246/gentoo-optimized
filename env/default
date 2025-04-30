@@ -1,18 +1,14 @@
-source /etc/portage/env/compiler-clang
+COMMON_FLAGS="-O2 -march=native -pipe"
 
-WARNING_FLAGS="-Werror=odr -Werror=strict-aliasing"
-
-COMMON_FLAGS="${COMMON_FLAGS} -flto=auto ${WARNING_FLAGS}"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
-LDFLAGS="${LDFLAGS}"
+LDFLAGS="${LDFLAGS} -Wl,-O2 -Wl,--as-needed"
 
 CGO_CFLAGS="${COMMON_FLAGS}"
 CGO_CXXFLAGS="${COMMON_FLAGS}"
 CGO_FFLAGS="${COMMON_FLAGS}"
 CGO_LDFLAGS="${LDFLAGS}"
 
-RUSTFLAGS="${RUSTFLAGS}"
-
+RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=2"

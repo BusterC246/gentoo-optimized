@@ -1,4 +1,4 @@
-source /etc/portage/env/compiler-gcc-lto
+source /etc/portage/env/lto
 
 #GRAPHITE_FLAGS="-fgraphite-identity -floop-nest-optimize"
 IPAPTA="-fipa-pta"

@@ -1,4 +1,4 @@
-source /etc/portage/env/compiler-gcc
+source /etc/portage/env/default
 
 WARNING_FLAGS="-Werror=odr -Werror=lto-type-mismatch -Werror=strict-aliasing"
 
