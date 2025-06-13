@@ -15,5 +15,3 @@ CGO_CXXFLAGS="${COMMON_FLAGS}"
 CGO_FFLAGS="${COMMON_FLAGS}"
 CGO_LDFLAGS="${LDFLAGS}"
 
-RUSTFLAGS="${RUSTFLAGS} -Clinker=clang -Clinker-plugin-lto -Clink-arg=-fuse-ld=lld"
-
