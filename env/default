@@ -10,4 +10,4 @@ CGO_CXXFLAGS="${COMMON_FLAGS}"
 CGO_FFLAGS="${COMMON_FLAGS}"
 CGO_LDFLAGS="${LDFLAGS}"
 
-RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=2"
+RUSTFLAGS="-C target-cpu=native -C strip=debuginfo -C opt-level=3"
