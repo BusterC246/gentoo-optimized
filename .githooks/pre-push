@@ -1,0 +1,16 @@
+#!/bin/sh
+# Pre-push hook: run shellcheck on all shell scripts and block the push
+# if any check fails, so broken shell scripts can never be pushed.
+
+if ! command -v shellcheck >/dev/null 2>&1; then
+  echo "pre-push: shellcheck not installed; install it to enable this check" >&2
+  exit 0
+fi
+
+# Run shellcheck on every tracked shell script. Quoted "$script" and a
+# while-read loop avoid word-splitting warnings entirely.
+git ls-files | grep -E '\.(sh|bash)$' | while IFS= read -r script; do
+  [ -n "$script" ] || continue
+  echo "pre-push: shellcheck $script"
+  shellcheck "$script" || exit 1
+done

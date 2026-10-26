@@ -1,0 +1,6 @@
+*/*::guru ~amd64
+*/*::steam-overlay
+
+dev-util/opencode-bin **
+sys-kernel/cachyos-sources ~amd64
+media-fonts/fontawesome **

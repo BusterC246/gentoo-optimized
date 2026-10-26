@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Hardware-override smoke tests (SYNC_* env overrides documented in sync.sh).
+        override:
+          - 'SYNC_JOBS=8 SYNC_LOAD=6.4'
+          - 'SYNC_JOBS=4 SYNC_LOAD=3.2 SYNC_EMERGE_JOBS=2 SYNC_EMERGE_LOAD=1.6'
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install shellcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+
+      - name: ShellCheck all shell scripts (POSIX sh, strictest level)
+        run: |
+          shellcheck -s sh sync.sh .githooks/pre-commit .githooks/pre-push
+
+      - name: Template render smoke test (apply into scratch PORTAGE_DIR)
+        run: |
+          TEST_PORTAGE=$(mktemp -d)
+          export PORTAGE_DIR="$TEST_PORTAGE"
+          ./sync.sh --simulate apply
+          ./sync.sh apply
+          grep -q 'MAKEOPTS="-j' "$TEST_PORTAGE/make.conf"
+          grep -q 'EMERGE_DEFAULT_OPTS="-j' "$TEST_PORTAGE/make.conf"
+          ! grep -q '@MAKEOPTS@\|@EMERGE_DEFAULT_OPTS@' "$TEST_PORTAGE/make.conf"
+          rm -rf "$TEST_PORTAGE"
+
+      - name: Pull round-trip (repo must be unchanged after pull)
+        run: |
+          TEST_PORTAGE=$(mktemp -d)
+          export PORTAGE_DIR="$TEST_PORTAGE"
+          ./sync.sh apply
+          ./sync.sh pull
+          git -C . diff --quiet && echo "pull round-trip: repo unchanged"
+          rm -rf "$TEST_PORTAGE"
+
+      - name: Read-only check against scratch PORTAGE_DIR
+        run: |
+          TEST_PORTAGE=$(mktemp -d)
+          export PORTAGE_DIR="$TEST_PORTAGE"
+          ./sync.sh apply >/dev/null
+          ./sync.sh check
+
+      - name: Hardware-override smoke test (${{ matrix.override }})
+        run: |
+          TEST_PORTAGE=$(mktemp -d)
+          export PORTAGE_DIR="$TEST_PORTAGE"
+          eval "${{ matrix.override }}" ./sync.sh apply
+          case "${{ matrix.override }}" in
+            *SYNC_JOBS=8*) grep -q 'MAKEOPTS="-j8 -l6.4"' "$TEST_PORTAGE/make.conf" ;;
+            *SYNC_JOBS=4*) grep -q 'MAKEOPTS="-j4 -l3.2"' "$TEST_PORTAGE/make.conf" ;;
+          esac
+          rm -rf "$TEST_PORTAGE"
